@@ -1,0 +1,135 @@
+/* @import "~/node_modules/react-vis/dist/style"; */
+
+/* Main-content start  */
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.main_wrapper {
+    display: flex;
+    width: 1334px;
+    background-color: #F9F9F9;
+}
+
+/* Menu nav start  */
+.b_nav {
+    display: inline-block;
+    transform: rotate(90deg) scale(1,2);
+    margin-right: 11px;
+    margin-top: 2px;
+}
+
+.nav {
+    width: 215px;
+    height: 100vw;
+    background-color: #FFFFFF;
+    box-shadow: 4px 0px 10px rgba(93, 109, 151, 0.1);
+}
+
+.nav_item {
+    list-style-type: none;
+    padding: 18px 0px 17px 53px;
+    border-bottom: 1px solid #F9F9F9;
+}
+
+    .nav_item:first-child {
+        display: flex;
+        flex-direction: row;
+        padding-left: 34px;
+    }
+
+
+.nav_link {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.nav_text {
+    font: 300 16px Ubuntu, "times new roman", times, roman, serif;
+    line-height: 18px;
+    color: #5D6D97;
+    transform: rotate(0.19deg);
+}
+/* Menu nav end  */
+
+
+.main_content {
+    padding: 0px 0px 0px 0px;
+}
+
+.main_head {
+    display: flex;
+    justify-content: center;
+    font: 400 20px Ubuntu, "times new roman", times, roman, serif;
+    line-height: 23px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    color: #3C5AA8;
+    opacity: 0.4;
+}
+
+
+/* table */
+
+table, td, th {
+    border: 0.5px solid rgba(93, 110, 151, 0.4);
+    background-color: #FFFFFF;
+    box-shadow: 4px 0px 10px rgba(93, 109, 151, 0.1);
+}
+
+.form_table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.b_save_container{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.b_save{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    width: 189px;
+    height: 38px;
+    font: 1.2rem Ubuntu, "times new roman", times, roman, serif;
+    line-height: 16px;
+    color: #FFFFFF;
+    background-color: #4A9DFF;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+
+#b_save {
+    margin-top: 5px;
+}
+
+th {
+    font: 14px Ubuntu, "times new roman", times, roman, serif;
+    line-height: 16px;
+    color: #3C5AA8;
+    opacity: 0.4;
+}
+
+td {
+    font: 14px Ubuntu, "times new roman", times, roman, serif;
+    line-height: 16px;
+    color: #5D6E97;
+}
+
+.main_retention {
+    width: 100%;
+    height: auto;
+}
+
+.main_select {
+    margin-bottom: 50px;
+}
+
+/* Main-end end  */
