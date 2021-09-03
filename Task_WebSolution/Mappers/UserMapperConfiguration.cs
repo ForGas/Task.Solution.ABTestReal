@@ -18,12 +18,12 @@ namespace Task_WebSolution.Mappers
 
                 .ForMember(userDto => userDto.DateRegistration,
                     opt => opt.MapFrom(user => user.DateRegistration != null
-                        ? string.Format("dd/MM/yyyy", user.DateRegistration)
+                        ? user.DateRegistration.Value.ToString("dd/MM/yyyy")
                         : string.Empty))
 
                 .ForMember(userDto => userDto.DateLastActivity,
                     opt => opt.MapFrom(user => user.DateLastActivity != null
-                        ? string.Format("dd/MM/yyyy", user.DateLastActivity)
+                        ? user.DateLastActivity.Value.ToString("dd/MM/yyyy")
                         : string.Empty));
 
             CreateMap<UserDto, User>()
@@ -31,12 +31,12 @@ namespace Task_WebSolution.Mappers
 
                 .ForMember(user => user.DateRegistration,
                     opt => opt.MapFrom(userDto => userDto.DateRegistration != null
-                        ? DateTime.ParseExact(userDto.DateRegistration, "dd/MM/yyyy", CultureInfo.InvariantCulture)
+                        ? DateTime.ParseExact(userDto.DateRegistration.Replace('.', '/'), "dd/MM/yyyy", CultureInfo.InvariantCulture)
                         : new DateTime?()))
 
                 .ForMember(user => user.DateLastActivity,
                     opt => opt.MapFrom(userDto => userDto.DateLastActivity != null
-                        ? DateTime.ParseExact(userDto.DateLastActivity, "dd/MM/yyyy", CultureInfo.InvariantCulture)
+                        ? DateTime.ParseExact(userDto.DateLastActivity.Replace('.', '/'), "dd/MM/yyyy", CultureInfo.InvariantCulture)
                         : new DateTime?()));
         }
     }

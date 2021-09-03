@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 export default class UserForm extends Component {
     constructor(props) {
@@ -45,15 +45,15 @@ export default class UserForm extends Component {
                                 <tr key={user.id}>
                                     <td><label htmlFor="id" form="user_form">{user.id}</label></td>
                                     <td>
-                                        <input type = "text" value={user.dateRegistration} placeholder={placeholder}
+                                        <input mask={user.id} type= "text" value={user.dateRegistration} placeholder={placeholder}
                                             onChange={(e) => this.onUpdateDateRegistration(index, e)} 
                                             maxLength = {maxLength}                    
                                         />
                                     </td>
                                     <td>
-                                        <input type = "text" value={user.dateLastActivity} placeholder={placeholder}
+                                        <input mask={user.id} type= "text" value={user.dateLastActivity} placeholder={placeholder}
                                             onChange={(e) => this.onUpdateDateLastActivity(index, e)} 
-                                            maxLength = {maxLength}                             
+                                            maxLength = {maxLength}                    
                                         />
                                     </td>
                                 </tr>
@@ -72,29 +72,26 @@ export default class UserForm extends Component {
     }
 
     addSeparateInDate(value) {       
-        return value += value.length === 2 
-            ? '.' : value.length === 5 
+        return value += value.length === 2
+            ? '.' : value.length === 5
                 ? '.' : '';
     }
 
     onUpdateDateRegistration = (index, e) => {
         const user = this.state.users[index];
-        var dateRegistration = e.target.value;
+        let dateRegistration = e.target.value;
 
         dateRegistration = user.dateRegistration.length > dateRegistration.length 
             ? this.removeSeparateInDate(dateRegistration)
             : this.addSeparateInDate(dateRegistration);
         
         this.setState(state => {
-            const users = 
-                state.users.map((user, otherIndex) => {
-                    return otherIndex === index 
-                        ? user.dateRegistration = dateRegistration 
-                        : user;
-                }
-            );
-     
-          return users;
+            return state.users.map((user, otherIndex) => {
+                  return otherIndex === index
+                      ? user.dateRegistration = dateRegistration
+                      : user;
+              }
+          );
         });
 
         console.log(this.state.users);
@@ -102,24 +99,22 @@ export default class UserForm extends Component {
 
     onUpdateDateLastActivity = (index, e) => {
         const user = this.state.users[index];
-        var dateLastActivity = e.target.value;
+
+        let dateLastActivity = e.target.value;
 
         dateLastActivity = user.dateLastActivity.length > dateLastActivity.length 
             ? this.removeSeparateInDate(dateLastActivity)
             : this.addSeparateInDate(dateLastActivity);
 
         this.setState(state => {
-            const users = 
-                state.users.map((user, otherIndex) => {
-                    return otherIndex === index 
-                        ? user.dateLastActivity = dateLastActivity 
+            return state.users.map((user, otherIndex) => {
+                    return otherIndex === index
+                        ? user.dateLastActivity = dateLastActivity
                         : user;
                 }
             );
-     
-          return users;
         });
-
+    
         console.log(this.state.users);
     };
 

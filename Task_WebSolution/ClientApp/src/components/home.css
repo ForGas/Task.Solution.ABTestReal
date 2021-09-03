@@ -13,6 +13,26 @@
 }
 
 /* Menu nav start  */
+
+.b_main {
+    width: 240px;
+    height: 50px;
+  
+    font: 1.5rem Ubuntu, "times new roman", times, roman, serif;
+    line-height: 16px;
+  
+    color: #FFFFFF;
+    background-color: #4A9DFF;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.b_main-center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 .b_nav {
     display: inline-block;
     transform: rotate(90deg) scale(1,2);

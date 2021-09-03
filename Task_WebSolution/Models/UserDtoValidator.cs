@@ -24,7 +24,7 @@ namespace Task_WebSolution.Context.Validators
                     .WithMessage(x => $"Date registration should be not empty! User Id: {x.Id}")
                 .Length(10)
                     .WithMessage(x => "Date registration should be is full! User Id: {x.Id}")
-                .Must(x => IsValidCorrectDate(x))
+                .Must(IsValidCorrectDate)
                     .WithMessage(x => $"Date registration nonexistent date! User Id: {x.Id}")
                 .Must(x => DateTime.Parse(x) <= DateTime.Now)
                         .WithMessage(x => $"Date registration should be no more than the present! User Id: {x.Id}");
@@ -37,10 +37,19 @@ namespace Task_WebSolution.Context.Validators
                     .WithMessage(x => $"Date last activity should be not empty! User Id: {x.Id}")
                 .Length(10)
                     .WithMessage(x => $"Date last activity should be is full! User Id: {x.Id}")
-                .Must(x => IsValidCorrectDate(x))
+                .Must(IsValidCorrectDate)
                         .WithMessage(x => $"Date last activity nonexistent date! User Id: {x.Id}")
                 .Must(x => DateTime.Parse(x) <= DateTime.Now)
                         .WithMessage(x => $"Date last activity should be no more than the present! User Id: {x.Id}");
+
+            //RuleFor(x => x)
+            //    .Cascade(CascadeMode.Stop)
+            //        .Must(x => IsValidCorrectDate(x.DateRegistration)
+            //            || IsValidCorrectDate(x.DateRegistration))
+            //            .WithMessage(x => $"Date nonexistent date! User Id: {x.Id}")
+            //            .Must(x => DateTime.Parse(x.DateRegistration.Replace('.', '/')) 
+            //                <= DateTime.Parse(x.DateLastActivity.Replace('.', '/')))
+            //                .WithMessage(x => $"Date registration should be less than last activity! User Id: {x.Id}");
         }
 
         private static bool IsValidCorrectDate(string dateString)

@@ -17,9 +17,8 @@ namespace Task_WebSolution.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private UserRepository _userRepository;
-        private IMapper _mapper;
-
+        private readonly UserRepository _userRepository;
+        private readonly IMapper _mapper;
 
         public UserController(UserRepository userRepository, IMapper mapper)
         {
@@ -28,78 +27,54 @@ namespace Task_WebSolution.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult PostListUser([FromBody] IEnumerable<UserDto> users)
-        {
-            if (users == null)
-            {
-                return BadRequest($"Error {users} is null ");
-            }
-
-            if (ModelState.IsValid)
-            {
-                foreach (var user in users)
-                {
-                    if (_userRepository.Get(user.Id) == null)
-                    {
-                        _userRepository.Save(_mapper.Map<User>(user));
-                    }
-                    else
-                    {
-                        return BadRequest("Duplicate id");
-                    }
-                }
-
-                return Ok("Saved");
-            }
-
-
-            return BadRequest("Error");
-        }
-
-        [HttpGet("test")]
-        public ActionResult GetTest()
-        {
-            return null;
-        }
-
+        // PATCH : users
         [HttpPatch]
-        public ActionResult UpdateDates([FromBody]List<UserDto> fullDataUsers)
+        public async Task<ActionResult> UpdateDatesForUsersAsync([FromBody] List<UserDto> fullDataUsers)
         {
             if (ModelState.IsValid)
             {
-                //fullDataUsers.ForEach(x => 
-                //    _userRepository.Save(_mapper.Map<User>(x)));
+                await _userRepository
+                        .MultiSaveAsync(fullDataUsers
+                            .Select(x => _mapper.Map<User>(x)));
 
                 return NoContent();
             }
 
-            return BadRequest(ModelState);
+            return BadRequest(fullDataUsers);
         }
 
+        // GET : users
         [HttpGet]
-        public List<UserDto> GetUsers()
+        public ActionResult<List<UserDto>> GetUsersWithoutDate()
         {
             return _userRepository.GetAll()
                 .Where(x => x.DateRegistration is null && x.DateLastActivity is null)
                     .Take(10)
                         .Select(x => _mapper.Map<UserDto>(x))
+                            .ToList();
+        }
+
+        // GET : users/full
+        [HttpGet("full")]
+        public ActionResult<List<UserDto>> GetUsersWithFullInfo()
+        {
+            return _userRepository.GetAll()
+                .Where(x => x.DateRegistration is not null && x.DateLastActivity is not null)
+                    .Select(x => _mapper.Map<UserDto>(x))
                         .ToList();
         }
 
+        // DELETE : users/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(long id)
         {
             var user = _userRepository.Get(id);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _userRepository.Remove(user);
-
-            return Ok($"Delete {user}");
+            return user is null 
+                ? NotFound(user)
+                : _userRepository.Remove(user)
+                    ? StatusCode(StatusCodes.Status204NoContent)
+                    : StatusCode(StatusCodes.Status400BadRequest);
         }
     }
 }

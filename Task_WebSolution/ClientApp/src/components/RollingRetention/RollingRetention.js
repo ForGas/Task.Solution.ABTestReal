@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries} from 'react-vis';
-//import RollingRetentionX from './RollingRetentionX';
 import DiffDates from './DiffDates';
 
 export default class RollingRetention extends Component {
@@ -16,7 +15,7 @@ export default class RollingRetention extends Component {
 
     componentDidMount() {
         fetch(
-            "users",
+            "users/full",
             { method: 'GET' }
         )
         .then(res => res.json())
@@ -39,7 +38,6 @@ export default class RollingRetention extends Component {
 
     render() {
         const {isLoaded, error, users} = this.state;
-
         let userData = [];
         
         if (users.length !== 0) {
@@ -78,8 +76,6 @@ export default class RollingRetention extends Component {
                         <HorizontalGridLines style={{stroke: 'red', strokeWidth: 0.5}} />  
 
                         </XYPlot>
-
-                        {/* <RollingRetentionX users={users} /> */}
                     </div>
                 )
             }

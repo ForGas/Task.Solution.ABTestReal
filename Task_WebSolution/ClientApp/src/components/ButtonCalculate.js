@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import RollingRetention from './RollingRetention';
+import RollingRetention from './RollingRetention/RollingRetention';
 
 export default class ButtonCalculate extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
-            isPress: false
-        }
-
+        this.state = { isPress: false}
         this.press = this.press.bind(this);
     }
 
@@ -21,19 +18,9 @@ export default class ButtonCalculate extends Component {
     render() {
         const {isPress} = this.state;
 
-        if (isPress) {
-            return (
-                <div>
-                    <RollingRetention />
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <button onClick={this.press} className="b_main">Calculate</button>
-                </div>
-            )
-        }
+        return isPress 
+            ? <div><RollingRetention /></div>
+            : <div className="b_main-center"><button onClick={this.press} className="b_main">Calculate</button></div>
     }
 }
 

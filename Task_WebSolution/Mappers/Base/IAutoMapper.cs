@@ -1,6 +1,6 @@
 ﻿namespace Task_WebSolution.Mappers.Base
 {
-    interface IAutoMapper 
+    internal interface IAutoMapper 
     {
 
     }

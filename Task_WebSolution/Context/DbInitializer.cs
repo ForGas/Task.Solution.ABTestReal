@@ -15,7 +15,7 @@ namespace Task_WebSolution.Context
         {
             var scope = serviceProvider.CreateScope();
             await using var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
-            var isExists = context.GetService<IDatabaseCreator>() is RelationalDatabaseCreator databaseCreator &&
+            var isExists = context!.GetService<IDatabaseCreator>() is RelationalDatabaseCreator databaseCreator &&
                 await databaseCreator.ExistsAsync();
 
             if (isExists) return;
@@ -32,7 +32,7 @@ namespace Task_WebSolution.Context
             dbContext.Set<User>().AddRange(CreateDefaultUsers());
         }
 
-        private static List<User> CreateDefaultUsers()
+        private static IEnumerable<User> CreateDefaultUsers()
         {
             return new List<User> 
             { 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserForm from './UserForm/UserForm';
-//import ButtonCalculate from './ButtonCalculate';
+import ButtonCalculate from './ButtonCalculate';
 //import React, { userState, memo } from 'react';
 
 import './home.css'
@@ -12,7 +12,8 @@ export class Home extends Component {
         <div className="main_content">
             <span className="main_head">TASK</span>
             <UserForm />
-            {/* <ButtonCalculate />  */}
+
+            <ButtonCalculate/>
         </div>
     );
   }
