@@ -20,7 +20,7 @@ export default class ButtonCalculate extends Component {
 
         return isPress 
             ? <div><RollingRetention /></div>
-            : <div className="b_main-center"><button onClick={this.press} className="b_main">Calculate</button></div>
+            : <div className="block-center"><button onClick={this.press} className="b_main">Calculate</button></div>
     }
 }
 

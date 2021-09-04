@@ -1,4 +1,13 @@
-/* @import "~/node_modules/react-vis/dist/style"; */
+
+INPUT.text {
+    border: 1px solid #39c; /* Исходная рамка вокруг поля */
+    width: 80%; /* Ширина поля */ 
+}
+
+INPUT.text:focus {
+    border: 1px solid #39c; /* Рамка при получении фокуса */
+}
+  
 
 /* Main-content start  */
 .main {
@@ -27,7 +36,7 @@
     margin-bottom: 50px;
 }
 
-.b_main-center {
+.block-center {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -102,6 +111,13 @@ table, td, th {
 .form_table {
     border-collapse: collapse;
     width: 100%;
+}
+
+.rolling-retention-x {
+    outline: none !important;
+    width: 5%;
+    border: none;
+    border: solid 1px #f2f2f2;
 }
 
 .b_save_container{

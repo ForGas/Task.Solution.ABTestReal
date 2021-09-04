@@ -1,10 +1,5 @@
-import React, { Component } from 'react';
-import Select from 'react-select';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries} from 'react-vis';
-import DiffDates from './DiffDates';
-import UniqueDate from './UniqueDate';
-import RollingRetentionCount from './RollingRetentionCount';
-
+import React, {Component} from "react";
+import getUserMetricData from './GetUserMetricData';
 
 export default class RollingRetentionX extends Component {
     constructor(props) {
@@ -12,76 +7,35 @@ export default class RollingRetentionX extends Component {
     
         this.state = {
             users: props.users,
-            selectedOption: null,
+            day: "0"
         }
 
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
-    };
-
-    sizeBar(userData) {
-        return userData.length * 30;
+    handleChange(e) {
+        this.setState({
+            day: e.target.value
+        });
     }
 
-    
     render() {
-        const {users, selectedOption} = this.state;
-        const uniqueDateArr = UniqueDate(users);
-
-        let userData = [];
-        
-        if (selectedOption !== null) {
-            userData = users.filter(user=> user.dateRegistration === selectedOption.value).map((user, index) => {
-                return {x: (index + 1), y: DiffDates(new Date(user.dateLastActivity), new Date(user.dateRegistration))}
-            })
-        }
+        const {day, users} = this.state;
 
         return (
-            <div className="main_retention">
-                <span className="main_head">Rolling Retention X day</span>
+            <div>
+                <span>
+                    <b>Rolling Retention</b>
 
-                <Select
-                        value={this.state.selectedOption}
-                        onChange={this.handleChange}
-                        options={uniqueDateArr}
-                        className="main_select"
-                />
+                    <input type="text" value={this.state.day}
+                    placeholder="X" onChange= {this.handleChange}
+                    className="rolling-retention-x"/>
 
-                <XYPlot
-                    width={850}
-                    height={600}
-                    margin={{top: 20, right: 50}}
-                    stackBy="y"
-                    color={'#e2ba24'}
-                    opacity={1}
-                    yDomain={[0, 30]}
-                    xType="ordinal"
-                    >
-                    
-                    <XAxis title="User" 
-                    style={{text: {stroke: 'none', fill: '#1923f0', fontWeight: 900}}}/>
-
-                    <YAxis title="Day" tickFormat={day => `${day}`} 
-                    style={{text: {stroke: 'none', fill: '#3c3cf4', fontWeight: 600}}} />
-
-                    <YAxis
-                    title="Rolling Retention"
-                    orientation="right"
-                    
-                    tickFormat={day => `${RollingRetentionCount(userData, day)}%`} 
-                    tickLabelAngle={5}
-                    style={{text: {stroke: 'none', fill: '#471a04', fontWeight: 900}}} />
-
-                    <VerticalBarSeries data={userData} barWidth={1} style={{stroke: '#574810', strokeWidth: 1}}/>
-                    <HorizontalGridLines style={{stroke: 'black', strokeWidth: 1}} />
-                </XYPlot>
-
+                    <div>
+                        <span>day = {getUserMetricData(day, users)}%</span>
+                    </div>
+                </span> 
             </div>
         )
     }
 }
-

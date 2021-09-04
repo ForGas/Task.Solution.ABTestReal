@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries} from 'react-vis';
-import DiffDates from './DiffDates';
+import getUserMetricData from './GetUserMetricData';
+import RollingRetentionX from './RollingRetentionX';
+import Histogram from './Histogram';
+import Metrics from './Metrics';
 
 export default class RollingRetention extends Component {
     constructor(props) {
@@ -38,47 +40,33 @@ export default class RollingRetention extends Component {
 
     render() {
         const {isLoaded, error, users} = this.state;
-        let userData = [];
-        
+        const days = 30;
+        let userFullMetricData = [];
+
         if (users.length !== 0) {
-            userData = users.map((user, index) => {
-                return {x: (index + 1), y: DiffDates(new Date(user.dateLastActivity), new Date(user.dateRegistration))}
+            userFullMetricData = [...Array(days)].map((_, x) => {
+                return {x, y: getUserMetricData(x, users)}
             })
         }
-        
-        if (error) {
-            return <p>Error {error.message}</p>
-        } else if (!isLoaded) {
-            return <p> Loading...</p>
-        } else {
-            if(userData.length < 1) {
-                return (
-                    <div>Элементов нет</div>
-                )
-            } else {
-                return (
-                    <div>
+
+        return error 
+            ? <p>Error {error.message}</p>
+            : !isLoaded
+                ? <p>Loading...</p>
+                : userFullMetricData.length < 1                   
+                    ? <div>Элементов нет</div>                  
+                    : <div>
                         <span className="main_head">Rolling Retention 7 day</span>
-                        <XYPlot
-                        width={900}
-                        height={600}
-                        xType="ordinal"
-                        yDomain={[0, 20]}
-                        yDistance={50}>
-                         
-                        <VerticalBarSeries
-                        style={{stroke: 'violet', strokeWidth: 1}}
-                        data={userData}/>
-                        <XAxis title="USER" tickFormat={u => `${u}`}/>
+                        
+                        <div className="block-center">
+                            <div>{Metrics(userFullMetricData)}</div>
+                        </div>
 
-                        <YAxis title="DAY" />
+                        <div>
+                            <RollingRetentionX users={users} />
+                        </div>
 
-                        <HorizontalGridLines style={{stroke: 'red', strokeWidth: 0.5}} />  
-
-                        </XYPlot>
+                        <div>{Histogram(userFullMetricData)}</div>
                     </div>
-                )
-            }
-        }
     }
 }

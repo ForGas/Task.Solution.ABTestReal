@@ -14,6 +14,8 @@ using Serilog.Events;
 using Task_WebSolution.Context;
 using Task_WebSolution.Context.Repositories;
 using Task_WebSolution.Context.Validators;
+using Task_WebSolution.Services;
+using Task_WebSolution.Services.Interfaces;
 
 namespace Task_WebSolution
 {
@@ -38,6 +40,9 @@ namespace Task_WebSolution
             services.AddScoped(x =>
                 new UserRepository(
                     x.GetService<ApplicationDbContext>()));
+
+            services.AddScoped<IFileService<TextFormat>>(x =>
+                new ProjectDirectoryService());
 
             services
                 .AddMvc()
