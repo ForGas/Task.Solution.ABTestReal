@@ -1,18 +1,14 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Serilog;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Task_WebSolution.Context.Model;
-using Task_WebSolution.Context.Repositories;
-using Task_WebSolution.Context.Validators;
 using Task_WebSolution.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Task_WebSolution.Services;
+using System.Collections.Generic;
+using Task_WebSolution.Context.Model;
 using Task_WebSolution.Services.Interfaces;
+using Task_WebSolution.Context.Repositories;
 
 namespace Task_WebSolution.Controllers
 {
@@ -30,7 +26,6 @@ namespace Task_WebSolution.Controllers
             _mapper = mapper;
             _fileService = fileService;
         }
-
 
         // PATCH : users
         [HttpPatch]
@@ -75,7 +70,7 @@ namespace Task_WebSolution.Controllers
         {
             var user = _userRepository.Get(id);
 
-            return user is null 
+            return user is null
                 ? NotFound(user)
                 : _userRepository.Remove(user)
                     ? StatusCode(StatusCodes.Status204NoContent)

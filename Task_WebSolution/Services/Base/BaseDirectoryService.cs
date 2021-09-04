@@ -51,9 +51,9 @@ namespace Task_WebSolution.Services.Base
             }
 
             var filesNames = Directory
-                                    .GetFiles(_directoryPath)
-                                    .Select(x => Path.GetFileName(x))
-                                    .ToList();
+                    .GetFiles(_directoryPath)
+                        .Select(x => Path.GetFileName(x))
+                            .ToList();
 
             var extension = GetExtensionByFileName(approximateFileName);
 
@@ -82,7 +82,6 @@ namespace Task_WebSolution.Services.Base
             {
                 return false;
             }
- 
 
             var regex = new Regex(@"^\w*.");
             var fileExtension = regex.Replace(fileName, "");

@@ -1,13 +1,11 @@
 using System;
 using Serilog;
-using Serilog.Events;
 using System.Threading.Tasks;
 using Task_WebSolution.Context;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Serilog.Formatting.Compact;
 
 namespace Task_WebSolution
 {
@@ -58,8 +56,9 @@ namespace Task_WebSolution
                     .UseSerilog((hostingContext, loggerConfiguration) =>
                     {
                         loggerConfiguration
-                            .ReadFrom.Configuration(hostingContext.Configuration)
                             .Enrich.FromLogContext()
+                            .WriteTo.Console()
+                            .ReadFrom.Configuration(hostingContext.Configuration)
                             .Enrich.WithProperty("ApplicationName", typeof(Program).Assembly.GetName().Name)
                             .Enrich.WithProperty("Environment", hostingContext.HostingEnvironment);
                     });
