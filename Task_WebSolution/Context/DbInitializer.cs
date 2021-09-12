@@ -44,6 +44,8 @@ namespace Task_WebSolution.Context
                 new User {}, new User {}, new User {}, new User {}, new User {},
                 new User {}, new User {}, new User {}, new User {}, new User {},
                 new User {}, new User {}, new User {}, new User {}, new User {},
+                new User {}, new User {}, new User {}, new User {}, new User {},
+                new User {}, new User {}, new User {}, new User {}, new User {}
             };
         }
     }

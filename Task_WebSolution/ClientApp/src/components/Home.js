@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import UserForm from './UserForm/UserForm';
-import ButtonCalculate from './ButtonCalculate';
-//import React, { userState, memo } from 'react';
+import Profiling from './Profiling/Profiling';
 
 import './home.css'
 export class Home extends Component {
@@ -11,9 +9,7 @@ export class Home extends Component {
     return (
         <div className="main_content">
             <span className="main_head">TASK</span>
-            <UserForm />
-
-            <ButtonCalculate/>
+            <Profiling/>
         </div>
     );
   }

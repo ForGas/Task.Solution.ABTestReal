@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Task_WebSolution.Context.Model;
 using Task_WebSolution.Services.Interfaces;
 using Task_WebSolution.Context.Repositories;
+using System;
 
 namespace Task_WebSolution.Controllers
 {
@@ -94,7 +95,9 @@ namespace Task_WebSolution.Controllers
 
             var result = await _fileService.ReadLogsInFileAsync(fileName);
 
-            return Ok(result);
+            return Ok(result!
+                            .Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
+                                .TakeLast(5));
         }
     }
 }

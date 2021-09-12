@@ -13,6 +13,8 @@ export default class ButtonCalculate extends Component {
         this.setState({
             isPress: true,
         })
+
+        this.props.handlerProfiling();
     }
 
     render() {

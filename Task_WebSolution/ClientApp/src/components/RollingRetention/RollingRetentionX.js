@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import getUserMetricData from './GetUserMetricData';
+import getUserMetricData from './Helpers/GetUserMetricData';
 
 export default class RollingRetentionX extends Component {
     constructor(props) {

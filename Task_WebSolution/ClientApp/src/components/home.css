@@ -1,14 +1,13 @@
 
 INPUT.text {
-    border: 1px solid #39c; /* Исходная рамка вокруг поля */
-    width: 80%; /* Ширина поля */ 
+    border: 1px solid #39c;
+    width: 80%;
 }
 
 INPUT.text:focus {
-    border: 1px solid #39c; /* Рамка при получении фокуса */
+    border: 1px solid #39c;
 }
   
-
 /* Main-content start  */
 .main {
     display: flex;
@@ -62,11 +61,11 @@ INPUT.text:focus {
     border-bottom: 1px solid #F9F9F9;
 }
 
-    .nav_item:first-child {
-        display: flex;
-        flex-direction: row;
-        padding-left: 34px;
-    }
+.nav_item:first-child {
+    display: flex;
+    flex-direction: row;
+    padding-left: 34px;
+}
 
 
 .nav_link {
@@ -136,7 +135,7 @@ table, td, th {
     font: 1.2rem Ubuntu, "times new roman", times, roman, serif;
     line-height: 16px;
     color: #FFFFFF;
-    background-color: #4A9DFF;
+    background-color: #e4ecf5;
     border-radius: 10px;
     margin-bottom: 50px;
 }
@@ -166,6 +165,23 @@ td {
 
 .main_select {
     margin-bottom: 50px;
+}
+
+#profiling {
+    border: 0.5px solid rgba(93, 110, 151, 0.4);
+    color: #5D6D97;
+    font-size: 13px;
+    
+    margin: 20px;
+    padding: 10px;
+}
+
+.profiling-text {
+    display: flex;
+    justify-content: center;
+    color: #3C5AA8;
+    opacity: 0.4;
+    font: 400 20px Ubuntu, "times new roman", times, roman, serif;
 }
 
 /* Main-end end  */

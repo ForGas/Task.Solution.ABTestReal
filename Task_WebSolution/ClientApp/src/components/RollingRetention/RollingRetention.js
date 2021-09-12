@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getUserMetricData from './GetUserMetricData';
+import getUserMetricData from './Helpers/GetUserMetricData';
 import RollingRetentionX from './RollingRetentionX';
 import Histogram from './Histogram';
 import Metrics from './Metrics';

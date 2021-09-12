@@ -3,7 +3,7 @@ import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import '../node_modules/react-vis/dist/style.css';
-import './custom.css'
+import './custom.css';
 
 export default class App extends Component {
   static displayName = App.name;

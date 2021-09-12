@@ -56,7 +56,6 @@ export default class DateInput extends Component {
 
         return ( <input type = "text" value={textDate} placeholder={placeholder}
             onChange = {this.handleChange} onKeyDown={this.keyPressFunc} maxLength = {maxLength}
-            //pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"
             htmlFor={inputName} name={inputName} form="user_form"
             />
         );

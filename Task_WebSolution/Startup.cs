@@ -1,21 +1,18 @@
-using AutoMapper;
+using Serilog;
 using FluentValidation;
+using Task_WebSolution.Context;
+using Task_WebSolution.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Serilog;
-using Serilog.Events;
-using Task_WebSolution.Context;
-using Task_WebSolution.Context.Repositories;
 using Task_WebSolution.Context.Validators;
-using Task_WebSolution.Services;
+using Task_WebSolution.Context.Repositories;
 using Task_WebSolution.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace Task_WebSolution
 {

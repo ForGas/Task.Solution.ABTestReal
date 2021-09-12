@@ -23,7 +23,7 @@ namespace Task_WebSolution.Context.Validators
                 .NotEmpty()
                     .WithMessage(x => $"Date registration should be not empty! User Id: {x.Id}")
                 .Length(10)
-                    .WithMessage(x => "Date registration should be is full! User Id: {x.Id}")
+                    .WithMessage(x => $"Date registration should be is full! User Id: {x.Id}")
                 .Must(IsValidCorrectDate)
                     .WithMessage(x => $"Date registration nonexistent date! User Id: {x.Id}")
                 .Must(x => DateTime.Parse(x) <= DateTime.Now)
@@ -38,16 +38,17 @@ namespace Task_WebSolution.Context.Validators
                 .Length(10)
                     .WithMessage(x => $"Date last activity should be is full! User Id: {x.Id}")
                 .Must(IsValidCorrectDate)
-                        .WithMessage(x => $"Date last activity nonexistent date! User Id: {x.Id}")
+                    .WithMessage(x => $"Date last activity nonexistent date! User Id: {x.Id}")
                 .Must(x => DateTime.Parse(x) <= DateTime.Now)
-                        .WithMessage(x => $"Date last activity should be no more than the present! User Id: {x.Id}");
+                    .WithMessage(x => $"Date last activity should be no more than the present! User Id: {x.Id}");
 
 
-            RuleFor(x => x).Custom((x, context) => {
-                bool valid = IsValidCorrectDate(x.DateRegistration)
+            RuleFor(x => x).Custom((x, context) =>
+            {
+                bool isValid = IsValidCorrectDate(x.DateRegistration)
                     && IsValidCorrectDate(x.DateLastActivity);
 
-                if (valid)
+                if (isValid)
                 {
                     var dateRegistration = DateTime.Parse(x.DateRegistration.Replace('.', '/'));
                     var dateLastActivity = DateTime.Parse(x.DateLastActivity.Replace('.', '/'));
@@ -66,6 +67,6 @@ namespace Task_WebSolution.Context.Validators
                         "dd/MM/yyyy", CultureInfo.InvariantCulture,
                             DateTimeStyles.None, out DateTime parsedDate);
         }
-        
+
     }
 }
