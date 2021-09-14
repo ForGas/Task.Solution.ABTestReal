@@ -1,0 +1,8 @@
+2021-09-14 01:49:00.331 +06:00 [INF] HTTP GET / responded 304 in 18139.7752 ms
+2021-09-14 01:49:00.522 +06:00 [INF] HTTP GET /static/js/bundle.js responded 200 in 30.2739 ms
+2021-09-14 01:49:02.533 +06:00 [INF] HTTP GET /static/js/main.chunk.js responded 200 in 2041.5259 ms
+2021-09-14 01:49:02.549 +06:00 [INF] HTTP GET /static/js/0.chunk.js responded 304 in 2057.8462 ms
+2021-09-14 01:49:02.923 +06:00 [INF] HTTP GET /manifest.json responded 304 in 4.8991 ms
+2021-09-14 01:49:03.095 +06:00 [INF] HTTP GET /users/logs responded 200 in 257.7544 ms
+2021-09-14 01:49:03.641 +06:00 [INF] HTTP GET /users responded 200 in 535.5123 ms
+2021-09-14 01:49:25.274 +06:00 [INF] HTTP GET /sockjs-node responded 101 in 22523.5930 ms

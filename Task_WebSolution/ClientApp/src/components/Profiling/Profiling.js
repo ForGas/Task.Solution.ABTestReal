@@ -8,8 +8,7 @@ export default class Profiling extends Component {
 
         this.state = {
             logs: [],   
-            error: null,
-            isLoaded: false,
+            error: '',
             isError : false,
         };
 
@@ -25,28 +24,36 @@ export default class Profiling extends Component {
     }
 
     async populateProfiling() {
-        const response = await fetch('users/logs', { method: 'GET' });
-        const data = await response.json();
-        
+        const response = await fetch('users/logs', 
+            { 
+                method: 'GET', 
+                headers: {'Content-Type': 'application/json'}
+            }
+        );
+
+        console.log('start profiling')
+        console.log(response)
+
+        const data = await response.json()
+
         if (response.ok) {
-            this.setState({ logs: data, isLoaded: true });
+            this.setState({ logs: data});
         }
         else {
             this.setState({error: data.error, isError: true})
         }
-
-        return data;
     }
 
     render() {
-        const {logs, error, isLoaded, isError} = this.state;
+        const {logs, error, isError} = this.state;
         
-        return !isLoaded 
-            ? <div>Loading</div>
-            : isError
-                ? <div>{error}</div>
-                :
-                <>
+        return <>
+                    {
+                        isError 
+                            ? <div>Ошибка {error}</div> 
+                            : <div></div>
+                    }
+
                     <div id="profiling">
                         <span className="profiling-text">Profiling</span>
                         {logs.map((log, index) => {

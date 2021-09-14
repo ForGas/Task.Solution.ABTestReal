@@ -39,7 +39,7 @@ namespace Task_WebSolution
                     x.GetService<ApplicationDbContext>()));
 
             services.AddScoped<IFileService<TextFormat>>(x =>
-                new ProjectDirectoryService());
+                new ProductionDirectoryService("logs"));
 
             services
                 .AddMvc()
@@ -49,6 +49,7 @@ namespace Task_WebSolution
                     fv.ImplicitlyValidateRootCollectionElements = true;
                 });
 
+            services.AddCors();
 
             services.AddValidatorsFromAssemblyContaining<UserDtoValidator>(ServiceLifetime.Scoped);
 
@@ -72,15 +73,22 @@ namespace Task_WebSolution
                 app.UseHsts();
             }
 
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
-
-            app.UseSerilogRequestLogging();
-
-
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            app.UseSerilogRequestLogging();
             app.UseRouting();
+
+            app.UseCors(builder => builder
+                .WithOrigins(
+                "https://localhost:5001",
+                "https://localhost:5000")
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .AllowAnyHeader()
+            );
+
 
             app.UseEndpoints(endpoints =>
             {

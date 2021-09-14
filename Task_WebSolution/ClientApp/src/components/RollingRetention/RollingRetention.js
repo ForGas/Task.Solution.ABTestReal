@@ -16,10 +16,10 @@ export default class RollingRetention extends Component {
     } 
 
     componentDidMount() {
-        fetch(
-            "users/full",
-            { method: 'GET' }
-        )
+        fetch("users/full", {
+            method: 'GET',
+            headers: { "Content-type": "application/json" }
+        })
         .then(res => res.json())
         .then(
             (result) => {

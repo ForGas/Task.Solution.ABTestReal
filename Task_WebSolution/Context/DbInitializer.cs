@@ -18,7 +18,7 @@ namespace Task_WebSolution.Context
             var isExists = context!.GetService<IDatabaseCreator>() is RelationalDatabaseCreator databaseCreator &&
                 await databaseCreator.ExistsAsync();
 
-            if (isExists) return;
+            //if (isExists) return;
 
             await context!.Database.MigrateAsync();
 

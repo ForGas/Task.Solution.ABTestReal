@@ -51,7 +51,7 @@ namespace Task_WebSolution.Services.Base
             }
 
             var filesNames = Directory
-                    .GetFiles(_directoryPath)
+                    .GetFiles(Path.Combine(_directoryPath, _filesDirectoryName))
                         .Select(x => Path.GetFileName(x))
                             .ToList();
 
@@ -122,13 +122,19 @@ namespace Task_WebSolution.Services.Base
 
             var fileWithStartName = Path.GetFileNameWithoutExtension(fileName);
 
+            Console.WriteLine($"fileWithStartName {fileWithStartName}");
+
             var fileNamesWithoutExtension = fileNames
                     .Select(x => Path.GetFileNameWithoutExtension(x))
                         .ToList();
 
+            Console.WriteLine($"fileNamesWithoutExtension {fileNamesWithoutExtension}");
+
             var logNumbers = fileNamesWithoutExtension
                     .Select(x => x.Replace(fileWithStartName, ""))
                         .ToList();
+
+            Console.WriteLine($"logNumbers {logNumbers}");
 
             var result = string.Concat(fileWithStartName,
                 logNumbers

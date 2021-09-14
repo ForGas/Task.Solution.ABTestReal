@@ -80,7 +80,7 @@ namespace Task_WebSolution.Controllers
 
         // GET : users/logs
         [HttpGet("logs")]
-        public async Task<ActionResult<string>> GetLogsAsync()
+        public async Task<ActionResult<List<string>>> GetLogsAsync()
         {
             var logFileName = "log.txt";
 
@@ -95,9 +95,10 @@ namespace Task_WebSolution.Controllers
 
             var result = await _fileService.ReadLogsInFileAsync(fileName);
 
-            return Ok(result!
-                            .Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
-                                .TakeLast(5));
+            return Ok(
+                    result
+                        .Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
+                            .TakeLast(5));
         }
     }
 }

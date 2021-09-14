@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Task_WebSolution.Services;
 
 namespace Task_WebSolution
 {
@@ -51,7 +52,7 @@ namespace Task_WebSolution
                     .CaptureStartupErrors(true)
                     .ConfigureAppConfiguration(config =>
                     {
-                        config.AddJsonFile("appsettings.Local.json", optional: true);
+                        config.AddJsonFile("appsettings.Development.json", optional: true);
                     })
                     .UseSerilog((hostingContext, loggerConfiguration) =>
                     {
@@ -59,6 +60,10 @@ namespace Task_WebSolution
                             .Enrich.FromLogContext()
                             .WriteTo.Console()
                             .ReadFrom.Configuration(hostingContext.Configuration)
+                            //   add for production server
+                            .WriteTo.RollingFile(AppDomain.CurrentDomain.BaseDirectory + "logs/log{Date}.txt",
+                                outputTemplate: "{Timestamp:HH:mm:ss} {Message:lj}{NewLine}",
+                                shared: true)
                             .Enrich.WithProperty("ApplicationName", typeof(Program).Assembly.GetName().Name)
                             .Enrich.WithProperty("Environment", hostingContext.HostingEnvironment);
                     });

@@ -23,8 +23,16 @@ export default class UserForm extends Component {
     }
 
     async populateUserData() {
-        const response = await fetch('users', { method: 'GET' });
+        const response = await fetch('users', { 
+            method: 'GET', 
+            headers: {"Content-type": "application/json" }
+        });
+
+        console.log(response);
+
         const data = await response.json();
+
+        console.log(data);
 
         if (response.ok) {
             this.setState({ users: data, isLoaded: true});
@@ -149,7 +157,7 @@ export default class UserForm extends Component {
         
         fetch("users", {  
             method: "PATCH",  
-            headers: {    "Content-type": "application/json"  },  
+            headers: {"Content-type": "application/json"},  
             body: JSON.stringify(users)
         }).then(async response => {
             if (response.status === 400) {
