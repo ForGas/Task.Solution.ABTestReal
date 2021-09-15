@@ -38,7 +38,7 @@ namespace Task_WebSolution.Controllers
                         .MultiSaveAsync(fullDataUsers
                             .Select(x => _mapper.Map<User>(x)));
 
-                return NoContent();
+                return Ok(fullDataUsers);
             }
 
             return BadRequest(fullDataUsers);
